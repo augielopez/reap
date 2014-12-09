@@ -1,0 +1,9 @@
+{
+  "SiteDomain" : "http://localhost:3000",
+  "Cloudinary": "hgtcy0hua",
+  "Express" : {
+    "port": "3000",
+    "cookieParser" : "F!ckingP0DcastsYO!",
+    "secret" : "F!ckingP0DcastsYO!"
+  }
+}
