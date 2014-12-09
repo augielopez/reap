@@ -3,7 +3,9 @@ var router = express.Router();
 var authRouter = express.Router();
 var oauthTools = require(process.cwd()+'/node_modules/oauth2orize/lib/utils');
 var passport = require(process.cwd() + '/lib/passport');
+
 var auth = require('../controllers/auth');
+var users = require('../controllers/users');
 
 var API = '/api/v1';
 
@@ -29,6 +31,8 @@ authRouter.use(passport.authenticate('bearer', {
   next();
 });
 
+authRouter.route(API + '/users')
+  .get(users.index);
 
 
 module.exports = router;
