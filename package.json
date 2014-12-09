@@ -24,6 +24,7 @@
     "redis": "~0.12.1",
     "nconf": "~0.7.1",
     "connect-redis": "~2.1.0",
-    "express-session": "~1.9.3"
+    "express-session": "~1.9.3",
+    "crypto": "0.0.3"
   }
 }
