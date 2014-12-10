@@ -15,6 +15,9 @@ var API = '/api/v1';
 router.get('/', function(req, res) {
   res.render('index', { title: 'Express' });
 });
+router.get('/views/:dir/:file', function(req, res) {
+  res.render(req.params.dir+'/'+req.params.file);
+})
 
 //
 // Auth
@@ -34,5 +37,11 @@ authRouter.use(passport.authenticate('bearer', {
 authRouter.route(API + '/users')
   .get(users.index);
 
+//
+// Everything else
+//
+router.get('*', function(req,res){
+  res.render('index', { title: 'Express' });
+})
 
 module.exports = router;
