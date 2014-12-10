@@ -15,6 +15,10 @@ angular.module('Reap', ['ngRoute']).
         templateUrl: '/views/home/splash.html',
         controller: 'SplashCtrl'
       }).
+      when('/about', {
+        templateUrl: '/views/home/about.html',
+        controller: 'SplashCtrl'
+      }).
       when('/login', {
         templateUrl: '/views/auth/login.html',
         controller: 'LoginCtrl'
