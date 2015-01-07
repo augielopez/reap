@@ -6,6 +6,7 @@ module.exports = function(sequelize, DataTypes) {
   var columns = {
     username: domain.anyname,
     name: domain.name,
+    email: domain.email,
     password: domain.passwd,
     passwordSalt: domain.passwd,
     avatar: domain.url,
