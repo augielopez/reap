@@ -1,4 +1,94 @@
 reap
 ====
 
-Podcast manager
+Installation Procedures:
+------------------------
+
+1. Homebrew installation (Ref URL: http://mxcl.github.com/homebrew/)
+
+        $ ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)”
+
+2. NodeJS v.0.10.x installation
+
+        $ brew install node
+
+        If you need to update your node version, you can install and use the "n" helper:
+
+        $ sudo npm cache clean -f
+        $ sudo npm install -g n
+        $ sudo n 0.10.15            # Gets specific version of node.
+
+3. Clone the repo from github under your working folder <dev home>:
+
+        $ git clone git@github.com:RBNA/reap.git
+
+        Note: your full path up to and including <dev home> should not have any spaces in the directory name(s).  This
+        can cause build errors later.
+
+4. Install Redis database (Ref URL: http://cook.coredump.me/post/18886668039/brew-install-redis):
+
+        $ brew install redis
+
+5. Install PostgreSQL v.9.3.x with PostGIS and DB objects by copying Postgres.app to your Applications directory:
+
+        Version: Postgres.app 9.3.1
+
+        Download from here:
+
+        https://github.com/PostgresApp/PostgresApp/releases
+
+        For existing Postgres.app 9.2.x upgrade, please follow the instructions on the web site postgresapp.com
+
+    If you already have Postgres installed and need to upgrade it, make sure you uninstall the old version and restart your computer first:
+
+        $ brew uninstall postgresql
+
+6. Set your path to newly installed postgres in ~/.bash_profile:
+        export PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
+
+        Note If you already have an export PATH set add the Postgres directory to it after a colon or add this export PATH under the existing entries
+
+7. Create Dev user and database:
+
+        $ psql -d postgres
+
+        CREATE USER [your username];
+        CREATE DATABASE reap;
+        GRANT ALL PRIVILEGES ON DATABASE reap to [your username];
+        CREATE EXTENSION postgis;
+
+        Set your password:
+
+        ALTER USER [your username] WITH PASSWORD '[your password]';
+
+        If necessary, start the postgres service:
+
+        $ pg_ctl start -l logfile -D "/Users/[your OS username]/Library/Application Support/Postgres/var"
+
+        Note: to drop the database prior to getting a fresh copy of the data:
+
+        # drop DATABASE reap; create database reap; GRANT all privileges on database reap to [your username];
+
+        Log out of psql with this command, or you'll leave an open connection and you won't be able to drop the DB:
+
+        # \q
+
+
+8. Export DATABASE_URL and TZ (add to your .bashrc, .bash_profile, or .profile)
+
+        $ export DATABASE_URL="postgres://[username]:[password]@localhost:5432/reap"
+        $ export TZ='UTC'
+
+9. Install Memcached
+
+        $ brew install memcached
+        $ /usr/local/bin/memcached -d  # start it as a daemon
+
+10. Install Node packages:
+
+        $ cd <dev home>/reap
+        $ npm install
+
+11. Start the local website:
+
+    node apps/www/app.js
